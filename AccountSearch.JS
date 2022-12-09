@@ -17,5 +17,6 @@ export default class AccountSearch extends LightningElement {
             .catch(error => {
                 console.log('Error', console.log(this.accounts));
             });
+             this.searchTerm = '';
     }
 }
