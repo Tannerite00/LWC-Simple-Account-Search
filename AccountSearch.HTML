@@ -7,7 +7,10 @@
       Results:
     </div>
       <template for:each={accounts} for:item="account">
-          <p key={account.Id}> Account ID: {account.Id} | Name: {account.Name} | Account Type: {account.Type}</p>
+          <p key={account.Id}> <strong>Account ID: </strong> {account.Id} </p>
+          <p key={account.Id}> <strong>Name: </strong> {account.Name} </p>
+          <p key={account.Id}> <strong>Account Type: </strong>{account.Type} </p>
+          <p key={account.Id}>______________________________________________________________</p>
       </template>
   </div>
 </template>
