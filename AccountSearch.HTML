@@ -1,16 +1,25 @@
 <template>
   <div style="background-color:white;">
+    <div class="header">
       Search for Accounts either by name or beginning letters.
-      <lightning-input label="Search Term:" value={searchTerm} onchange={handleSearchTermChange}></lightning-input>
-      <lightning-button label="Search" onclick={handleSearchButtonClick}></lightning-button>
-    <div style="background-color:skyblue;">
-      Results:
     </div>
-      <template for:each={accounts} for:item="account">
-          <p key={account.Id}> <strong>Account ID: </strong> {account.Id} </p>
-          <p key={account.Id}> <strong>Name: </strong> {account.Name} </p>
-          <p key={account.Id}> <strong>Account Type: </strong>{account.Type} </p>
-          <p key={account.Id}>______________________________________________________________</p>
+    <lightning-input class="slds-p-around_medium" label="Search Term:" value={searchTerm} onchange={handleSearchTermChange}></lightning-input>
+    <lightning-button class="slds-p-around_medium" label="Search" onclick={handleSearchButtonClick}></lightning-button>
+    
+    <template if:true={searchResults}>
+      <div class="slds-has-dividers_around-space slds-p-around_medium">
+        Results:
+      </div>
+        <ul class="slds-has-dividers_around-space slds-p-around_small">
+         <template for:each={accounts} for:item="account">
+            <li class="slds-item" key={account.id}>
+              <p key={account.Id}> <strong>Name: </strong> {account.Name} </p> 
+              <p key={account.Id}> <strong>Account ID: </strong> {account.Id} </p>
+              <p key={account.Id}> <strong>Account Type: </strong>{account.Type} <lightning-button class="slds-float_right" label="Edit"></lightning-button> </p>
+              <br>
+            </li>
+          </template>
+        </ul>
       </template>
   </div>
 </template>
