@@ -1,3 +1,18 @@
+.header {
+    font-size: 20px;
+    font-style: Bold;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
 .background {
     background-color: #FFFFFF;
+}
+
+.result {
+    font-size: 20px;
+    font-style: Bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #3e6ef4;
 }
