@@ -15,11 +15,384 @@
             <li class="slds-item" key={account.id}>
               <p key={account.Id}> <strong>Name: </strong> {account.Name} </p> 
               <p key={account.Id}> <strong>Account ID: </strong> {account.Id} </p>
-              <p key={account.Id}> <strong>Account Type: </strong>{account.Type} <lightning-button class="slds-float_right" label="Edit"></lightning-button> </p>
+              <p key={account.Id}> <strong>Account Type: </strong>{account.Type} <lightning-button class="slds-float_right" label="Edit" name={account.Id} onclick={handleEditAccount}></lightning-button> </p>
               <br>
             </li>
           </template>
         </ul>
       </template>
   </div>
+  <template if:true={editAccount}>
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+          <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+          </svg>
+          <span class="slds-assistive-text">Cancel and close</span>
+        </button>
+        <div class="slds-modal__header">
+          <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Edit Account Info</h1>
+          <p class="slds-m-top_x-small">Here’s a tagline if you need it. It is allowed to extend across mulitple lines, so I’m making up content to show that to you. It is allowed to
+            <a href="https://www.google.com"> contain links or be a link, click it to go to google.</a>.</p>
+        </div>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+          <div class="slds-form" role="list">
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="stacked-form-element-id-01">
+                    <abbr class="slds-required" title="required">* </abbr>Account Owner</label>
+                  <div class="slds-form-element__control">
+                    <input type="text" id="stacked-form-element-id-01" readonly="" required="" class="slds-input" value={owner} />
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="stacked-combobox-id-01" id="combobox-label-id-18">Account Name</label>
+                  <div class="slds-form-element__control">
+                    <div class="slds-combobox_container">
+                      <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                          <input type="text" class="slds-input slds-combobox__input slds-combobox__input-value" id="stacked-combobox-id-01" aria-autocomplete="list" aria-controls="stacked-listbox-id-01" aria-expanded="false" aria-haspopup="listbox"
+                            role="combobox" value={name} />
+                        </div>
+                        <div id="stacked-listbox-id-01" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" role="listbox">
+                          <ul class="slds-listbox slds-listbox_vertical" role="presentation"></ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="checkbox-unique-id-34">Security Assessment Required?</label>
+                  <div class="slds-form-element__control">
+                    <span class="slds-checkbox slds-checkbox_standalone">
+                      <input type="checkbox" id="checkbox-unique-id-34" name="label" value="option" />
+                      <span class="slds-checkbox_faux"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="stacked-combobox-id-02" id="combobox-label-id-19">Customer Type</label>
+                  <div class="slds-form-element__control">
+                    <div class="slds-combobox_container">
+                      <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                          <input type="text" class="slds-input slds-combobox__input" id="stacked-combobox-id-02" aria-controls="stacked-listbox-id-02" aria-expanded="false" aria-haspopup="listbox" role="combobox" placeholder="Type of Customer"
+                          value={type}/>
+                          <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
+                            <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+                              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                            </svg>
+                          </span> 
+                          <!-- here is as far as I have changed on the form -->
+<!-- 
+
+
+
+
+ -->
+                        </div>
+                        <div id="stacked-listbox-id-02" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                          <ul class="slds-listbox slds-listbox_vertical" role="presentation"></ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="stacked-form-element-id-02">Account Number</label>
+                  <div class="slds-form-element__icon">
+                    <button class="slds-button slds-button_icon">
+                      <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#info"></use>
+                      </svg>
+                      <span class="slds-assistive-text">Help</span>
+                    </button>
+                  </div>
+                  <div class="slds-form-element__control">
+                    <input type="text" id="stacked-form-element-id-02" class="slds-input" value="5367" />
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                  <label class="slds-form-element__label" for="stacked-form-element-id-03">Customer Start Date</label>
+                  <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                    <input type="text" id="stacked-form-element-id-03" class="slds-input" placeholder="Date Customer was signed" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <fieldset class="slds-form-element slds-form-element_compound slds-is-editing slds-form-element_stacked">
+                  <legend class="slds-form-element__legend slds-form-element__label">Location</legend>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                      <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-location-longitude-01">Longitude</label>
+                          <div class="slds-form-element__control">
+                            <input type="text" id="stacked-location-longitude-01" class="slds-input" value="10.283" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-location-latitude-01">Latitude</label>
+                          <div class="slds-form-element__control">
+                            <input type="text" id="stacked-location-latitude-01" class="slds-input" value="54.293" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing" role="group" aria-labelledby="picklist-group-label">
+                  <span id="picklist-group-label" class="slds-form-element__label slds-form-element__legend">Select Options</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-dueling-list">
+                      <div class="slds-assistive-text" id="drag-live-region" aria-live="assertive"></div>
+                      <div class="slds-assistive-text" id="option-drag-label">Press space bar when on an item, to move it within the list. Cmd/Ctrl plus left and right arrow keys, to move items between lists.</div>
+                      <div class="slds-dueling-list__column slds-dueling-list__column_responsive">
+                        <span class="slds-form-element__label" id="label-15">First Category</span>
+                        <div class="slds-dueling-list__options">
+                          <ul aria-describedby="option-drag-label" aria-labelledby="label-15" aria-multiselectable="true" class="slds-listbox slds-listbox_vertical" role="listbox">
+                            <li role="presentation" class="slds-listbox__item">
+                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="0">
+                                <span class="slds-media__body">
+                                  <span class="slds-truncate" title="Option 1">Option 1</span>
+                                </span>
+                              </div>
+                            </li>
+                            <li role="presentation" class="slds-listbox__item">
+                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="-1">
+                                <span class="slds-media__body">
+                                  <span class="slds-truncate" title="Option 2">Option 2</span>
+                                </span>
+                              </div>
+                            </li>
+                            <li role="presentation" class="slds-listbox__item">
+                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="-1">
+                                <span class="slds-media__body">
+                                  <span class="slds-truncate" title="Option 3">Option 3</span>
+                                </span>
+                              </div>
+                            </li>
+                            <li role="presentation" class="slds-listbox__item">
+                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="-1">
+                                <span class="slds-media__body">
+                                  <span class="slds-truncate" title="Option 6">Option 6</span>
+                                </span>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="slds-dueling-list__column">
+                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move Selection to Second Category">
+                          <svg class="slds-button__icon" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#right"></use>
+                          </svg>
+                          <span class="slds-assistive-text">Move Selection to Second Category</span>
+                        </button>
+                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move Selection to First Category">
+                          <svg class="slds-button__icon" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#left"></use>
+                          </svg>
+                          <span class="slds-assistive-text">Move Selection to First Category</span>
+                        </button>
+                      </div>
+                      <div class="slds-dueling-list__column slds-dueling-list__column_responsive">
+                        <span class="slds-form-element__label" id="label-16">Second Category</span>
+                        <div class="slds-dueling-list__options">
+                          <ul aria-describedby="option-drag-label" aria-labelledby="label-16" aria-multiselectable="true" class="slds-listbox slds-listbox_vertical" role="listbox">
+                            <li role="presentation" class="slds-listbox__item">
+                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="0">
+                                <span class="slds-media__body">
+                                  <span class="slds-truncate" title="Option 4">Option 4</span>
+                                </span>
+                              </div>
+                            </li>
+                            <li role="presentation" class="slds-listbox__item">
+                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="-1">
+                                <span class="slds-media__body">
+                                  <span class="slds-truncate" title="Option 5">Option 5</span>
+                                </span>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="slds-dueling-list__column">
+                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move Selection Up">
+                          <svg class="slds-button__icon" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#up"></use>
+                          </svg>
+                          <span class="slds-assistive-text">Move Selection Up</span>
+                        </button>
+                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move Selection Down">
+                          <svg class="slds-button__icon" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                          </svg>
+                          <span class="slds-assistive-text">Move Selection Down</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <fieldset class="slds-form-element slds-form-element_compound slds-form-element_address slds-is-required slds-is-editing slds-form-element_stacked">
+                  <legend class="slds-form-element__legend slds-form-element__label">
+                    <abbr class="slds-required" title="required">* </abbr>Billing Address</legend>
+                  <div class="slds-form-element__icon">
+                    <button class="slds-button slds-button_icon">
+                      <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#info"></use>
+                      </svg>
+                      <span class="slds-assistive-text">Help</span>
+                    </button>
+                  </div>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                      <div class="slds-size_1-of-1">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-form-element-id-04">Billing Street</label>
+                          <div class="slds-form-element__control">
+                            <textarea id="stacked-form-element-id-04" required="" placeholder="Placeholder text…" class="slds-textarea">525 S. Lexington Ave</textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form-element__row">
+                      <div class="slds-size_4-of-6">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-form-element-id-05">Billing City</label>
+                          <div class="slds-form-element__control">
+                            <input type="text" id="stacked-form-element-id-05" required="" class="slds-input" value="Burlington" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slds-size_2-of-6">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-form-element-id-06">Billing State/Province</label>
+                          <div class="slds-form-element__control">
+                            <input type="text" id="stacked-form-element-id-06" required="" class="slds-input" value="NC" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form-element__row">
+                      <div class="slds-size_4-of-6">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-form-element-id-07">Billing Zip/Postal Code</label>
+                          <div class="slds-form-element__control">
+                            <input type="text" id="stacked-form-element-id-07" required="" class="slds-input" value="27215" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slds-size_2-of-6">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-form-element-id-08">Billing Country</label>
+                          <div class="slds-form-element__control">
+                            <input type="text" id="stacked-form-element-id-08" required="" class="slds-input" value="USA" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <fieldset class="slds-form-element slds-form-element_compound slds-form-element_address slds-is-editing slds-form-element_stacked">
+                  <legend class="slds-form-element__legend slds-form-element__label">Shipping Address</legend>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                      <div class="slds-size_1-of-1">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-form-element-id-09">Shipping Street</label>
+                          <div class="slds-form-element__control">
+                            <textarea id="stacked-form-element-id-09" placeholder="Placeholder text…" class="slds-textarea">312 Constitution Place</textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form-element__row">
+                      <div class="slds-size_4-of-6">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-form-element-id-10">Shipping City</label>
+                          <div class="slds-form-element__control">
+                            <input type="text" id="stacked-form-element-id-10" class="slds-input" value="Austin" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slds-size_2-of-6">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-form-element-id-11">Shipping State/Province</label>
+                          <div class="slds-form-element__control">
+                            <input type="text" id="stacked-form-element-id-11" class="slds-input" value="TX" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form-element__row">
+                      <div class="slds-size_4-of-6">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-form-element-id-12">Shipping Zip/Postal Code</label>
+                          <div class="slds-form-element__control">
+                            <input type="text" id="stacked-form-element-id-12" class="slds-input" value="78767" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slds-size_2-of-6">
+                        <div class="slds-form-element">
+                          <label class="slds-form-element__label" for="stacked-form-element-id-13">Shipping Country</label>
+                          <div class="slds-form-element__control">
+                            <input type="text" id="stacked-form-element-id-13" class="slds-input" value="USA" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing slds-form-element_1-col">
+                  <label class="slds-form-element__label" for="stacked-form-element-id-14">Description</label>
+                  <div class="slds-form-element__control">
+                    <textarea id="stacked-form-element-id-14" placeholder="Placeholder text…" class="slds-textarea">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod.</textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-modal__footer">
+          <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleEditAccount}>Cancel</button>
+          <button class="slds-button slds-button_brand">Save</button>
+        </div>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+  </template>
 </template>
