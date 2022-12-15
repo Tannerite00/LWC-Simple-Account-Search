@@ -11,7 +11,7 @@ export default class TestUserSearch extends LightningElement {
     @track searchTerm = '';
     @track accounts = [];
 
-    @api recordId;
+    recordId = '';
 
     @wire(getRecord, { recordId: '$recordId', fields: FIELDS})
     account;
@@ -47,31 +47,18 @@ export default class TestUserSearch extends LightningElement {
             this.searchTerm = '';
     }
 
-    handleEditAccount() {
+    handleEditModal() {
         if(this.editAccount == false){
         this.editAccount = true;
         } else {
             this.editAccount = false;
         }
-        handleWhichAccountEdit();
     }
 
     handleWhichAccountEdit(event) {
-        let idToEdit = event.target.name;
-        let accounts = this.accounts;
-        let accountsIndex;
-        let recordIdToEdit;
-
-        for(let i=0; i<accounts.length; i++) {
-            if(idToEdit === accounts[i].id) {
-                accountsIndex = i;
-            }
-        }
-
-        recordIdToEdit = accounts[accountsIndex].recordId;
-        this.recordId = recordIdToEdit;
-        console.log(this.recordId);
-        return this.recordId;
+        this.recordId = event.target.name;
+        console.log('id to edit', this.recordId); 
+        this.handleEditModal();
     }
 
     handleSave() {
