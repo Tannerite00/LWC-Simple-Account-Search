@@ -12,10 +12,10 @@
       </div>
         <ul class="slds-has-dividers_around-space slds-p-around_small">
          <template for:each={accounts} for:item="account">
-            <li class="slds-item" key={account.id}>
+            <li class="slds-item" key={account.Id}>
               <p key={account.Id}> <strong>Name: </strong> {account.Name} </p> 
               <p key={account.Id}> <strong>Account ID: </strong> {account.Id} </p>
-              <p key={account.Id}> <strong>Account Type: </strong>{account.Type} <lightning-button class="slds-float_right" label="Edit" name={account.Id} onclick={handleEditAccount}></lightning-button> </p>
+              <p key={account.Id}> <strong>Account Type: </strong>{account.Type} <lightning-button key={account.Id} class="slds-float_right" label="Edit" name={account.Id} onclick={handleWhichAccountEdit}></lightning-button> </p>
               <br>
             </li>
           </template>
@@ -25,12 +25,6 @@
   <template if:true={editAccount}>
     <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
       <div class="slds-modal__container">
-        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
-          <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
-            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
-          </svg>
-          <span class="slds-assistive-text">Cancel and close</span>
-        </button>
         <div class="slds-modal__header">
           <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Edit Account Info</h1>
           <p class="slds-m-top_x-small">Here’s a tagline if you need it. It is allowed to extend across mulitple lines, so I’m making up content to show that to you. It is allowed to
@@ -42,7 +36,7 @@
               <div class="slds-form__item" role="listitem">
                 <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                   <label class="slds-form-element__label" for="stacked-form-element-id-01">
-                    <abbr class="slds-required" title="required">* </abbr>Account Owner</label>
+                    <abbr class="slds-required" title="required">* </abbr>Account Id</label>
                   <div class="slds-form-element__control">
                     <input type="text" id="stacked-form-element-id-01" readonly="" required="" class="slds-input" value={owner} />
                   </div>
