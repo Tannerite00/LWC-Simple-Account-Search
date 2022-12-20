@@ -98,10 +98,10 @@ export default class TestUserSearch extends LightningElement {
             console.log('handleSave recordId value: ', this.recordId);
             //breaks here 
 
-            fields[ACCOUNT_NAME_FIELD.fieldApiName] = this.accountName;
-            console.log('handleSave name value: ', this.accountName);
-            fields[ACCOUNT_TYPE_FIELD.fieldApiName] = this.accountType;
-            console.log('handleSave type value: ', this.accountType);
+            fields[ACCOUNT_NAME_FIELD.fieldApiName] = this.template.querySelector("[data-field='name']").value;
+            console.log('handleSave name value: ', this.template.querySelector("[data-field='name']").value);
+            fields[ACCOUNT_TYPE_FIELD.fieldApiName] = this.template.querySelector("[data-field='type']").value;
+            console.log('handleSave type value: ', this.template.querySelector("[data-field='type']").value);
 
             const recordInput = { fields: fields };
 
