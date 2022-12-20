@@ -14,8 +14,8 @@ export default class TestUserSearch extends LightningElement {
 
     recordId = '';
 
-    // name;
-    // type;
+    accountName;
+    accountType;
 
 
     @wire(getRecord, { recordId: '$recordId', fields: FIELDS})
@@ -67,19 +67,30 @@ export default class TestUserSearch extends LightningElement {
         this.handleEditModal();
     }
 
+    handleChange(e) {
+        if (e.target.name === "name") {
+        
+          //this is name input textbox
+          this.name = e.target.value;
+          console.log(this.name);
+        } else if (e.target.name === "industry") {
+        
+          //this is industry input textbox
+          this.type = e.target.value;
+          console.log(this.type);
+        }
+      }
+
     handleSave() {
         console.log('handleSave was clicked');
         const allValid = [...this.template.querySelectorAll('input')]
             .reduce((validSoFar, inputFields) => {
                 inputFields.reportValidity();
-                console.log('validSoFar', validSoFar);
-                console.log('inputFields', inputFields.checkValidity());
                 return validSoFar && inputFields.checkValidity();
             }, true);
 
         if (allValid) {
             // Create the recordInput object
-            console.log('inside handleSave if statement');
             
             const fields = {};
             console.log('fields' ,fields);
@@ -87,10 +98,10 @@ export default class TestUserSearch extends LightningElement {
             console.log('handleSave recordId value: ', this.recordId);
             //breaks here 
 
-            // fields[ACCOUNT_NAME_FIELD.fieldApiName] = this.name(), this.template.querySelector("[id='stacked-combobox-id-01']").value, this.name, this.name.value, this.name().value;
-            // console.log('handleSave name value: ', this.name);
-            // fields[ACCOUNT_TYPE_FIELD.fieldApiName] = this.type();
-            // console.log('handleSave type value: ', this.type);
+            fields[ACCOUNT_NAME_FIELD.fieldApiName] = this.accountName;
+            console.log('handleSave name value: ', this.accountName);
+            fields[ACCOUNT_TYPE_FIELD.fieldApiName] = this.accountType;
+            console.log('handleSave type value: ', this.accountType);
 
             const recordInput = { fields: fields };
 
