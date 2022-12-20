@@ -1,17 +1,22 @@
 import { LightningElement, track, wire, api } from 'lwc';
+import ID_FIELD from "@salesforce/schema/Account.Id";
 import ACCOUNT_NAME_FIELD from '@salesforce/schema/Account.Name';
 import ACCOUNT_OWNER_FIELD from '@salesforce/schema/Account.OwnerId';
 import ACCOUNT_TYPE_FIELD from '@salesforce/schema/Account.Type';
-import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import { getRecord, getFieldValue, updateRecord } from 'lightning/uiRecordApi';
 import searchAccounts from '@salesforce/apex/TestUserSearchController.searchAccounts'
 
-const FIELDS = [ACCOUNT_NAME_FIELD, ACCOUNT_OWNER_FIELD, ACCOUNT_TYPE_FIELD];
+const FIELDS = [ID_FIELD, ACCOUNT_NAME_FIELD, ACCOUNT_OWNER_FIELD, ACCOUNT_TYPE_FIELD];
 
 export default class TestUserSearch extends LightningElement {
     @track searchTerm = '';
     @track accounts = [];
 
     recordId = '';
+
+    // name;
+    // type;
+
 
     @wire(getRecord, { recordId: '$recordId', fields: FIELDS})
     account;
@@ -25,6 +30,7 @@ export default class TestUserSearch extends LightningElement {
 
     get owner() {
         return getFieldValue(this.account.data, ACCOUNT_OWNER_FIELD);
+        
     }
 
     get type() {
@@ -62,6 +68,39 @@ export default class TestUserSearch extends LightningElement {
     }
 
     handleSave() {
+        console.log('handleSave was clicked');
+        const allValid = [...this.template.querySelectorAll('input')]
+            .reduce((validSoFar, inputFields) => {
+                inputFields.reportValidity();
+                console.log('validSoFar', validSoFar);
+                console.log('inputFields', inputFields.checkValidity());
+                return validSoFar && inputFields.checkValidity();
+            }, true);
 
+        if (allValid) {
+            // Create the recordInput object
+            console.log('inside handleSave if statement');
+            
+            const fields = {};
+            console.log('fields' ,fields);
+            fields[ID_FIELD.fieldApiName] = this.recordId;
+            console.log('handleSave recordId value: ', this.recordId);
+            //breaks here 
+
+            // fields[ACCOUNT_NAME_FIELD.fieldApiName] = this.name(), this.template.querySelector("[id='stacked-combobox-id-01']").value, this.name, this.name.value, this.name().value;
+            // console.log('handleSave name value: ', this.name);
+            // fields[ACCOUNT_TYPE_FIELD.fieldApiName] = this.type();
+            // console.log('handleSave type value: ', this.type);
+
+            const recordInput = { fields: fields };
+
+            updateRecord(recordInput)
+                .then((record) => {
+                console.log(record);
+            });
+            this.handleEditModal();
+            
+        }
+        
     }
 }
