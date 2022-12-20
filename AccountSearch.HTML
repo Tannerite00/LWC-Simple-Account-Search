@@ -36,7 +36,7 @@
               <div class="slds-form__item" role="listitem">
                 <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                   <label class="slds-form-element__label" for="stacked-form-element-id-01">
-                    <abbr class="slds-required" title="required">* </abbr>Account Id</label>
+                    <abbr class="slds-required" title="required">* </abbr>Account Owner Id</label>
                   <div class="slds-form-element__control">
                     <input type="text" id="stacked-form-element-id-01" readonly="" required="" class="slds-input" value={owner} />
                   </div>
@@ -50,7 +50,7 @@
                       <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
                         <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
                           <input type="text" class="slds-input slds-combobox__input slds-combobox__input-value" id="stacked-combobox-id-01" aria-autocomplete="list" aria-controls="stacked-listbox-id-01" aria-expanded="false" aria-haspopup="listbox"
-                            role="combobox" value={name} />
+                            role="combobox" value={name} data-field="name" onchange={handleChange} />
                         </div>
                         <div id="stacked-listbox-id-01" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" role="listbox">
                           <ul class="slds-listbox slds-listbox_vertical" role="presentation"></ul>
@@ -81,19 +81,7 @@
                       <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
                         <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
                           <input type="text" class="slds-input slds-combobox__input" id="stacked-combobox-id-02" aria-controls="stacked-listbox-id-02" aria-expanded="false" aria-haspopup="listbox" role="combobox" placeholder="Type of Customer"
-                          value={type}/>
-                          <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
-                            <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
-                              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
-                            </svg>
-                          </span> 
-                          <!-- here is as far as I have changed on the form -->
-<!-- 
-
-
-
-
- -->
+                          value={type} data-field="type" onchange={handleChange}/>
                         </div>
                         <div id="stacked-listbox-id-02" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
                           <ul class="slds-listbox slds-listbox_vertical" role="presentation"></ul>
@@ -106,164 +94,10 @@
             </div>
             <div class="slds-form__row">
               <div class="slds-form__item" role="listitem">
-                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                  <label class="slds-form-element__label" for="stacked-form-element-id-02">Account Number</label>
-                  <div class="slds-form-element__icon">
-                    <button class="slds-button slds-button_icon">
-                      <svg class="slds-button__icon" aria-hidden="true">
-                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#info"></use>
-                      </svg>
-                      <span class="slds-assistive-text">Help</span>
-                    </button>
-                  </div>
-                  <div class="slds-form-element__control">
-                    <input type="text" id="stacked-form-element-id-02" class="slds-input" value="5367" />
-                  </div>
-                </div>
-              </div>
-              <div class="slds-form__item" role="listitem">
-                <div class="slds-form-element slds-form-element_stacked slds-is-editing slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
-                  <label class="slds-form-element__label" for="stacked-form-element-id-03">Customer Start Date</label>
-                  <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
-                    <input type="text" id="stacked-form-element-id-03" class="slds-input" placeholder="Date Customer was signed" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="slds-form__row">
-              <div class="slds-form__item" role="listitem">
-                <fieldset class="slds-form-element slds-form-element_compound slds-is-editing slds-form-element_stacked">
-                  <legend class="slds-form-element__legend slds-form-element__label">Location</legend>
-                  <div class="slds-form-element__control">
-                    <div class="slds-form-element__row">
-                      <div class="slds-size_1-of-2">
-                        <div class="slds-form-element">
-                          <label class="slds-form-element__label" for="stacked-location-longitude-01">Longitude</label>
-                          <div class="slds-form-element__control">
-                            <input type="text" id="stacked-location-longitude-01" class="slds-input" value="10.283" />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="slds-size_1-of-2">
-                        <div class="slds-form-element">
-                          <label class="slds-form-element__label" for="stacked-location-latitude-01">Latitude</label>
-                          <div class="slds-form-element__control">
-                            <input type="text" id="stacked-location-latitude-01" class="slds-input" value="54.293" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
-              </div>
-              <div class="slds-form__item" role="listitem">
-                <div class="slds-form-element slds-form-element_stacked slds-is-editing" role="group" aria-labelledby="picklist-group-label">
-                  <span id="picklist-group-label" class="slds-form-element__label slds-form-element__legend">Select Options</span>
-                  <div class="slds-form-element__control">
-                    <div class="slds-dueling-list">
-                      <div class="slds-assistive-text" id="drag-live-region" aria-live="assertive"></div>
-                      <div class="slds-assistive-text" id="option-drag-label">Press space bar when on an item, to move it within the list. Cmd/Ctrl plus left and right arrow keys, to move items between lists.</div>
-                      <div class="slds-dueling-list__column slds-dueling-list__column_responsive">
-                        <span class="slds-form-element__label" id="label-15">First Category</span>
-                        <div class="slds-dueling-list__options">
-                          <ul aria-describedby="option-drag-label" aria-labelledby="label-15" aria-multiselectable="true" class="slds-listbox slds-listbox_vertical" role="listbox">
-                            <li role="presentation" class="slds-listbox__item">
-                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="0">
-                                <span class="slds-media__body">
-                                  <span class="slds-truncate" title="Option 1">Option 1</span>
-                                </span>
-                              </div>
-                            </li>
-                            <li role="presentation" class="slds-listbox__item">
-                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="-1">
-                                <span class="slds-media__body">
-                                  <span class="slds-truncate" title="Option 2">Option 2</span>
-                                </span>
-                              </div>
-                            </li>
-                            <li role="presentation" class="slds-listbox__item">
-                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="-1">
-                                <span class="slds-media__body">
-                                  <span class="slds-truncate" title="Option 3">Option 3</span>
-                                </span>
-                              </div>
-                            </li>
-                            <li role="presentation" class="slds-listbox__item">
-                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="-1">
-                                <span class="slds-media__body">
-                                  <span class="slds-truncate" title="Option 6">Option 6</span>
-                                </span>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div class="slds-dueling-list__column">
-                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move Selection to Second Category">
-                          <svg class="slds-button__icon" aria-hidden="true">
-                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#right"></use>
-                          </svg>
-                          <span class="slds-assistive-text">Move Selection to Second Category</span>
-                        </button>
-                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move Selection to First Category">
-                          <svg class="slds-button__icon" aria-hidden="true">
-                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#left"></use>
-                          </svg>
-                          <span class="slds-assistive-text">Move Selection to First Category</span>
-                        </button>
-                      </div>
-                      <div class="slds-dueling-list__column slds-dueling-list__column_responsive">
-                        <span class="slds-form-element__label" id="label-16">Second Category</span>
-                        <div class="slds-dueling-list__options">
-                          <ul aria-describedby="option-drag-label" aria-labelledby="label-16" aria-multiselectable="true" class="slds-listbox slds-listbox_vertical" role="listbox">
-                            <li role="presentation" class="slds-listbox__item">
-                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="0">
-                                <span class="slds-media__body">
-                                  <span class="slds-truncate" title="Option 4">Option 4</span>
-                                </span>
-                              </div>
-                            </li>
-                            <li role="presentation" class="slds-listbox__item">
-                              <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" aria-selected="false" draggable="true" role="option" tabindex="-1">
-                                <span class="slds-media__body">
-                                  <span class="slds-truncate" title="Option 5">Option 5</span>
-                                </span>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div class="slds-dueling-list__column">
-                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move Selection Up">
-                          <svg class="slds-button__icon" aria-hidden="true">
-                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#up"></use>
-                          </svg>
-                          <span class="slds-assistive-text">Move Selection Up</span>
-                        </button>
-                        <button class="slds-button slds-button_icon slds-button_icon-container" title="Move Selection Down">
-                          <svg class="slds-button__icon" aria-hidden="true">
-                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
-                          </svg>
-                          <span class="slds-assistive-text">Move Selection Down</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="slds-form__row">
-              <div class="slds-form__item" role="listitem">
                 <fieldset class="slds-form-element slds-form-element_compound slds-form-element_address slds-is-required slds-is-editing slds-form-element_stacked">
                   <legend class="slds-form-element__legend slds-form-element__label">
                     <abbr class="slds-required" title="required">* </abbr>Billing Address</legend>
                   <div class="slds-form-element__icon">
-                    <button class="slds-button slds-button_icon">
-                      <svg class="slds-button__icon" aria-hidden="true">
-                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#info"></use>
-                      </svg>
-                      <span class="slds-assistive-text">Help</span>
-                    </button>
                   </div>
                   <div class="slds-form-element__control">
                     <div class="slds-form-element__row">
@@ -383,7 +217,7 @@
         </div>
         <div class="slds-modal__footer">
           <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleEditModal}>Cancel</button>
-          <button class="slds-button slds-button_brand">Save</button>
+          <button class="slds-button slds-button_brand" onclick={handleSave}>Save</button>
         </div>
       </div>
     </section>
