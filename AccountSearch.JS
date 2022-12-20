@@ -73,13 +73,13 @@ export default class TestUserSearch extends LightningElement {
           //this is name input textbox
           this.name = e.target.value;
           console.log(this.name);
-        } else if (e.target.name === "industry") {
+        } else if (e.target.name === "type") {
         
-          //this is industry input textbox
+          //this is type input textbox
           this.type = e.target.value;
           console.log(this.type);
         }
-      }
+    }
 
     handleSave() {
         console.log('handleSave was clicked');
